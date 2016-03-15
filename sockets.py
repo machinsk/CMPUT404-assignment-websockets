@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-# Copyright (c) 2013-2014 Abram Hindle
+# Copyright (c) 2013-2016 Abram Hindle, Jonathon Machinski
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -70,8 +70,8 @@ class Client:
     def get(self):
         return self.queue.get()
 
-clients = list()
 myWorld = World()
+
 
 def set_listener( entity, data ):
     ''' do something with the update ! '''
@@ -86,6 +86,7 @@ def send_all_json(obj):
     send_all( json.dumps(obj) )
 
 myWorld.add_set_listener( set_listener )
+clients = list()
 
 @app.route('/')
 def hello():
@@ -101,7 +102,7 @@ def read_ws(ws,client):
             print "WS RECV: %s" % received
             if (received is not None):
                 packet = json.loads(received)
-                send_all_json( packet )
+                send_all_json(packet)
             else:
                 break
     except:

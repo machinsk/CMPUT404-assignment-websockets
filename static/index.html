@@ -57,6 +57,7 @@ function drawCircle(context,entity) {
         strokeStyle = fillStyle;
         arc(x, y, (entity["radius"])?entity["radius"]:50, 0, 2.0 * Math.PI, false);
         //'''here'''
+        fill();
         stroke();
     }
 }
@@ -128,7 +129,9 @@ function addEntity(entity, data) {
     world[entity] = data;
     drawNextFrame(); // (but should we?)
     //XXX: Send a XHTML Request that updates the entity you just modified!
-    socket.send(JSON.stringify(world));
+    var value = {}
+    value[entity] = data;
+    socket.send(JSON.stringify(value));
 }
 var counter = 0;
 function addEntityWithoutName(data) {
@@ -236,7 +239,7 @@ mouse = (function() {
 //XXX: TODO Make these prettier!
         //'''here'''
 mouse.mousedowners.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'blue'});
+    addEntityWithoutName({'x':x,'y':y,'colour':'yellow'});
 });
 
 mouse.mouseuppers.push(function(x,y,clicked,e) {
@@ -244,7 +247,7 @@ mouse.mouseuppers.push(function(x,y,clicked,e) {
 });
 
 mouse.mousedraggers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'green',
+    addEntityWithoutName({'x':x,'y':y,'colour':'orange',
                           'radius':10});
 });
 
