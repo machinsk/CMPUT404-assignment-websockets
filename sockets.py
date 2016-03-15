@@ -49,7 +49,6 @@ class World:
         '''update the set listeners'''
         for listener in self.listeners:
             listener(entity, self.get(entity))
-            #here
 
     def clear(self):
         self.space = dict()
@@ -119,7 +118,6 @@ def subscribe_socket(ws):
     g = gevent.spawn( read_ws, ws, client )
     try:
         while True:
-            # block here
             msg = client.get()
             ws.send(msg)
 

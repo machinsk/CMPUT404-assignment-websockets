@@ -35,7 +35,9 @@ var W = canvas.width  = window.innerWidth-6;
 var H = canvas.height = window.innerHeight-50;
 var wscounter = 0;
 var socket;
-// '''here'''
+var bgImg = new Image();
+bgImg.src = '/static/background.jpg';
+context.drawImage(bgImg, 0, 0, W, H);
 
 function debug(str) {
     var debugDiv = document.getElementById('debug');
@@ -56,7 +58,6 @@ function drawCircle(context,entity) {
         fillStyle = entity["colour"];
         strokeStyle = fillStyle;
         arc(x, y, (entity["radius"])?entity["radius"]:50, 0, 2.0 * Math.PI, false);
-        //'''here'''
         fill();
         stroke();
     }
@@ -74,10 +75,7 @@ function prepEntity(entity) {
 
 function clearFrame() {
     with(context) {
-      //'''here'''
-	    moveTo(0,0);
-	    fillStyle = "#000";
-	    fillRect(0,0,W,H);
+	    context.drawImage(bgImg, 0, 0, W, H);
     }
 
 }
@@ -237,7 +235,6 @@ mouse = (function() {
 
 // Add the application specific mouse listeners!
 //XXX: TODO Make these prettier!
-        //'''here'''
 mouse.mousedowners.push(function(x,y,clicked,e) {
     addEntityWithoutName({'x':x,'y':y,'colour':'yellow'});
 });
